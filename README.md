@@ -1,26 +1,9 @@
-# Car service schedule
-
-The application maps the existing PostgreSQL physical model:
-
-- `"order"` (`order_id`, `order_date`, `license_plate`)
-- `cars` (`license_plate`, `brand`, `model`)
-- `works` (`work_name`, `work_category`)
-- `order_works` (`order_id`, `work_name`, `duration`, `cost`)
-
-Each result row represents one work performed for one order, so the output is
-in first normal form. Configure the existing PostgreSQL database URL, username,
-and password in `src/main/resources/hibernate.cfg.xml`. At startup, Hibernate
-creates missing mapped tables and updates the schema without dropping existing
-data, then the application queries and prints each row as a labeled block.
-
-Build and run:
-
-```text
-mvn clean install
-mvn -Dfile.encoding=UTF-8 exec:java -D"exec.mainClass=com.carservice.MainApp"
-```
-
-On Windows, set the terminal code page to UTF-8 first with `chcp 65001`.
+# Кроки для виконання
+1. Встановіть локально PostgreSQL, Maven та Java.
+2. Створіть базу даних carservice.
+3. Вкажіть правильне значення властивості `hibernate.connection.password` у файлі "src\main\resources\hibernate.cfg.xml".
+4. Зберіть програму за допомогою команди: `mvn clean install`.
+5. Запустіть програму за допомогою команди: `mvn exec:java -D"exec.mainClass=com.college.MainApp"`.
 
 # Результати виконання програми
 ```
