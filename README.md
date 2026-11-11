@@ -3,7 +3,7 @@
 2. Створіть базу даних carservice.
 3. Вкажіть правильне значення властивості `hibernate.connection.password` у файлі "src\main\resources\hibernate.cfg.xml".
 4. Зберіть програму за допомогою команди: `mvn clean install`.
-5. Запустіть програму за допомогою команди: `mvn exec:java -D"exec.mainClass=com.college.MainApp"`.
+5. Запустіть програму за допомогою команди: `mvn exec:java -D"exec.mainClass=com.carservice.MainApp"`.
 
 # Результати виконання програми
 ```
