@@ -1,1 +1,341 @@
-# carservice
+# Car service schedule
+
+The application maps the existing PostgreSQL physical model:
+
+- `"order"` (`order_id`, `order_date`, `license_plate`)
+- `cars` (`license_plate`, `brand`, `model`)
+- `works` (`work_name`, `work_category`)
+- `order_works` (`order_id`, `work_name`, `duration`, `cost`)
+
+Each result row represents one work performed for one order, so the output is
+in first normal form. Configure the existing PostgreSQL database URL, username,
+and password in `src/main/resources/hibernate.cfg.xml`. At startup, Hibernate
+creates missing mapped tables and updates the schema without dropping existing
+data, then the application queries and prints each row as a labeled block.
+
+Build and run:
+
+```text
+mvn clean install
+mvn -Dfile.encoding=UTF-8 exec:java -D"exec.mainClass=com.carservice.MainApp"
+```
+
+On Windows, set the terminal code page to UTF-8 first with `chcp 65001`.
+
+# Результати виконання програми
+```
+Nov 11, 2026 5:36:36 PM org.hibernate.Version logVersion
+INFO: HHH000412: Hibernate ORM core version 5.6.14.Final
+Nov 11, 2026 5:36:36 PM org.hibernate.annotations.common.reflection.java.JavaReflectionManager <clinit>
+INFO: HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+Nov 11, 2026 5:36:36 PM org.hibernate.engine.jdbc.connections.internal.ConnectionProviderInitiator instantiateC3p0Provider
+WARN: HHH000022: c3p0 properties were encountered, but the c3p0 provider class was not found on the classpath; these properties are going to be ignored.
+Nov 11, 2026 5:36:36 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
+WARN: HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+Nov 11, 2026 5:36:36 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/carservice]
+Nov 11, 2026 5:36:36 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001001: Connection properties: {password=****, user=postgres}
+Nov 11, 2026 5:36:36 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001003: Autocommit mode: false
+Nov 11, 2026 5:36:36 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections <init>
+INFO: HHH000115: Hibernate connection pool size: 20 (min=1)
+Nov 11, 2026 5:36:36 PM org.hibernate.dialect.Dialect <init>
+INFO: HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+Nov 11, 2026 5:36:37 PM org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl getIsolatedConnection
+INFO: HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@4460bc10] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+Hibernate: 
+    select
+        serviceord1_.order_id as col_0_0_,
+        serviceord1_.order_date as col_1_0_,
+        car2_.license_plate as col_2_0_,
+        car2_.brand as col_3_0_,
+        car2_.model as col_4_0_,
+        work3_.work_name as col_5_0_,
+        work3_.work_category as col_6_0_,
+        orderwork0_.duration as col_7_0_,
+        orderwork0_.cost as col_8_0_ 
+    from
+        order_works orderwork0_ 
+    inner join
+        "order" serviceord1_ 
+            on orderwork0_.order_id=serviceord1_.order_id 
+    inner join
+        cars car2_ 
+            on serviceord1_.license_plate=car2_.license_plate 
+    inner join
+        works work3_ 
+            on orderwork0_.work_name=work3_.work_name 
+    order by
+        serviceord1_.order_date,
+        serviceord1_.order_id,
+        work3_.work_name
+Замовлення: 1201
+Дата замовлення: 2026-09-02
+Автомобіль: Skoda Octavia
+Номерний знак: CA 1001 AA
+Робота: Заміна колодок
+Категорія: Гальмівна система
+Тривалість: 1.5
+Вартість: 900
+--------------------------------------------------
+Замовлення: 1201
+Дата замовлення: 2026-09-02
+Автомобіль: Skoda Octavia
+Номерний знак: CA 1001 AA
+Робота: Заміна мастила
+Категорія: Технічне обслуговування
+Тривалість: 0.8
+Вартість: 500
+--------------------------------------------------
+Замовлення: 1201
+Дата замовлення: 2026-09-02
+Автомобіль: Skoda Octavia
+Номерний знак: CA 1001 AA
+Робота: Зам?на фільтра
+Категорія: Технічне обслуговування
+Тривалість: 1.2
+Вартість: 850
+--------------------------------------------------
+Замовлення: 1202
+Дата замовлення: 2026-09-03
+Автомобіль: Renault Megane
+Номерний знак: CA 2002 BB
+Робота: Заміна колодок
+Категорія: Гальмівна система
+Тривалість: 1.2
+Вартість: 850
+--------------------------------------------------
+Замовлення: 1202
+Дата замовлення: 2026-09-03
+Автомобіль: Renault Megane
+Номерний знак: CA 2002 BB
+Робота: Перевірка освітлення
+Категорія: Електрообладнання
+Тривалість: 0.5
+Вартість: 300
+--------------------------------------------------
+Замовлення: 1203
+Дата замовлення: 2026-09-05
+Автомобіль: Skoda Octavia
+Номерний знак: CA 1001 AA
+Робота: Заміна колодок
+Категорія: Гальмівна система
+Тривалість: 0.5
+Вартість: 300
+--------------------------------------------------
+Замовлення: 1203
+Дата замовлення: 2026-09-05
+Автомобіль: Skoda Octavia
+Номерний знак: CA 1001 AA
+Робота: Заміна мастила
+Категорія: Технічне обслуговування
+Тривалість: 0.7
+Вартість: 520
+--------------------------------------------------
+Замовлення: 1203
+Дата замовлення: 2026-09-05
+Автомобіль: Skoda Octavia
+Номерний знак: CA 1001 AA
+Робота: Заміна фільтра
+Категорія: Технічне обслуговування
+Тривалість: 0.3
+Вартість: 200
+--------------------------------------------------
+Замовлення: 1204
+Дата замовлення: 2026-09-07
+Автомобіль: Toyota Corolla
+Номерний знак: CA 3003 CC
+Робота: Заміна фільтра
+Категорія: Технічне обслуговування
+Тривалість: 0.4
+Вартість: 230
+--------------------------------------------------
+Замовлення: 1204
+Дата замовлення: 2026-09-07
+Автомобіль: Toyota Corolla
+Номерний знак: CA 3003 CC
+Робота: Перевірка освітлення
+Категорія: Електрообладнання
+Тривалість: 0.6
+Вартість: 350
+--------------------------------------------------
+Замовлення: 1205
+Дата замовлення: 2026-09-09
+Автомобіль: Renault Megane
+Номерний знак: CA 2002 BB
+Робота: Заміна мастила
+Категорія: Технічне обслуговування
+Тривалість: 1.6
+Вартість: 1000
+--------------------------------------------------
+Замовлення: 1205
+Дата замовлення: 2026-09-09
+Автомобіль: Renault Megane
+Номерний знак: CA 2002 BB
+Робота: Перевірка освітлення
+Категорія: Електрообладнання
+Тривалість: 0.5
+Вартість: 350
+--------------------------------------------------
+Замовлення: 1206
+Дата замовлення: 2026-09-19
+Автомобіль: Skoda Octavia
+Номерний знак: CA 1001 AA
+Робота: Заміна колодок
+Категорія: Гальмівна система
+Тривалість: 1.5
+Вартість: 900
+--------------------------------------------------
+Замовлення: 1206
+Дата замовлення: 2026-09-19
+Автомобіль: Skoda Octavia
+Номерний знак: CA 1001 AA
+Робота: Заміна мастила
+Категорія: Технічне обслуговування
+Тривалість: 0.8
+Вартість: 500
+--------------------------------------------------
+Замовлення: 1206
+Дата замовлення: 2026-09-19
+Автомобіль: Skoda Octavia
+Номерний знак: CA 1001 AA
+Робота: Заміна фільтра
+Категорія: Технічне обслуговування
+Тривалість: 1.2
+Вартість: 850
+--------------------------------------------------
+Замовлення: 1207
+Дата замовлення: 2026-09-29
+Автомобіль: Renault Megane
+Номерний знак: CA 2002 BB
+Робота: Заміна колодок
+Категорія: Гальмівна система
+Тривалість: 1.2
+Вартість: 850
+--------------------------------------------------
+Замовлення: 1207
+Дата замовлення: 2026-09-29
+Автомобіль: Renault Megane
+Номерний знак: CA 2002 BB
+Робота: Перевірка освітлення
+Категорія: Електрообладнання
+Тривалість: 0.5
+Вартість: 300
+--------------------------------------------------
+Замовлення: 1208
+Дата замовлення: 2026-10-09
+Автомобіль: Skoda Octavia
+Номерний знак: CA 1001 AA
+Робота: Заміна колодок
+Категорія: Гальмівна система
+Тривалість: 0.5
+Вартість: 300
+--------------------------------------------------
+Замовлення: 1208
+Дата замовлення: 2026-10-09
+Автомобіль: Skoda Octavia
+Номерний знак: CA 1001 AA
+Робота: Заміна мастила
+Категорія: Технічне обслуговування
+Тривалість: 0.7
+Вартість: 520
+--------------------------------------------------
+Замовлення: 1208
+Дата замовлення: 2026-10-09
+Автомобіль: Skoda Octavia
+Номерний знак: CA 1001 AA
+Робота: Заміна фільтра
+Категорія: Технічне обслуговування
+Тривалість: 0.3
+Вартість: 200
+--------------------------------------------------
+Замовлення: 1209
+Дата замовлення: 2026-10-19
+Автомобіль: Toyota Corolla
+Номерний знак: CA 3003 CC
+Робота: Заміна фільтра
+Категорія: Технічне обслуговування
+Тривалість: 0.4
+Вартість: 230
+--------------------------------------------------
+Замовлення: 1209
+Дата замовлення: 2026-10-19
+Автомобіль: Toyota Corolla
+Номерний знак: CA 3003 CC
+Робота: Перевірка освітлення
+Категорія: Електрообладнання
+Тривалість: 0.6
+Вартість: 350
+--------------------------------------------------
+Замовлення: 1210
+Дата замовлення: 2026-10-29
+Автомобіль: Renault Megane
+Номерний знак: CA 2002 BB
+Робота: Заміна мастила
+Категорія: Технічне обслуговування
+Тривалість: 1.6
+Вартість: 1000
+--------------------------------------------------
+Замовлення: 1210
+Дата замовлення: 2026-10-29
+Автомобіль: Renault Megane
+Номерний знак: CA 2002 BB
+Робота: Перевірка освітлення
+Категорія: Електрообладнання
+Тривалість: 0.5
+Вартість: 350
+--------------------------------------------------
+Замовлення: 1211
+Дата замовлення: 2026-11-08
+Автомобіль: Skoda Octavia
+Номерний знак: CA 1001 AA
+Робота: Заміна колодок
+Категорія: Гальмівна система
+Тривалість: 1.5
+Вартість: 900
+--------------------------------------------------
+Замовлення: 1211
+Дата замовлення: 2026-11-08
+Автомобіль: Skoda Octavia
+Номерний знак: CA 1001 AA
+Робота: Заміна мастила
+Категорія: Технічне обслуговування
+Тривалість: 0.8
+Вартість: 500
+--------------------------------------------------
+Замовлення: 1211
+Дата замовлення: 2026-11-08
+Автомобіль: Skoda Octavia
+Номерний знак: CA 1001 AA
+Робота: Заміна фільтра
+Категорія: Технічне обслуговування
+Тривалість: 1.2
+Вартість: 850
+--------------------------------------------------
+Замовлення: 1212
+Дата замовлення: 2026-11-18
+Автомобіль: Renault Megane
+Номерний знак: CA 2002 BB
+Робота: Заміна колодок
+Категорія: Гальмівна система
+Тривалість: 1.2
+Вартість: 850
+--------------------------------------------------
+Замовлення: 1212
+Дата замовлення: 2026-11-18
+Автомобіль: Renault Megane
+Номерний знак: CA 2002 BB
+Робота: Перевірка освітлення
+Категорія: Електрообладнання
+Тривалість: 0.5
+Вартість: 300
+--------------------------------------------------
+Nov 11, 2026 5:36:37 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PoolState stop
+INFO: HHH10001008: Cleaning up connection pool [jdbc:postgresql://localhost:5432/carservice]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.607 s
+[INFO] Finished at: 2026-11-11T17:36:37+02:00
+[INFO] ------------------------------------------------------------------------
