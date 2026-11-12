@@ -2,6 +2,7 @@ package com.carservice;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -22,10 +23,13 @@ public class OrderWork {
 
     @MapsId("workName")
     @ManyToOne(optional = false)
-    @JoinColumn(name = "work_name")
+    @JoinColumn(name = "work_name", columnDefinition = "varchar(100)")
     private Work work;
 
+    @Column(columnDefinition = "numeric")
     private BigDecimal duration;
+
+    @Column(columnDefinition = "numeric")
     private BigDecimal cost;
 
     public OrderWorkId getId() {

@@ -21,8 +21,8 @@
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
 
-        <!-- Create missing mapped tables and update the schema without dropping existing data. -->
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <!-- Recreate mapped tables on startup, then repopulate them with the sample data. -->
+        <property name="hibernate.hbm2ddl.auto">create</property>
 
         <!-- Configure the current session context -->
         <property name="hibernate.current_session_context_class">thread</property>
