@@ -736,7 +736,7 @@ Hibernate:
 Тривалість: 0.5
 Вартість: 300
 --------------------------------------------------
-лист. 12, 2026 12:39:44 ПП org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PoolState stop
+Nov. 12, 2026 12:39:44 ПП org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PoolState stop
 INFO: HHH10001008: Cleaning up connection pool [jdbc:postgresql://localhost:5432/carservice]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
