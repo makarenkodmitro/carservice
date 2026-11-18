@@ -3,7 +3,7 @@ package com.carservice;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class CarServiceScheduleDTO {
+public class OrderWorkDTO {
     private final Integer orderId;
     private final LocalDate orderDate;
     private final String licensePlate;
@@ -14,7 +14,7 @@ public class CarServiceScheduleDTO {
     private final BigDecimal duration;
     private final BigDecimal cost;
 
-    public CarServiceScheduleDTO(Integer orderId, LocalDate orderDate, String licensePlate, String brand,
+    public OrderWorkDTO(Integer orderId, LocalDate orderDate, String licensePlate, String brand,
             String model, String workName, String workCategory, BigDecimal duration, BigDecimal cost) {
         this.orderId = orderId;
         this.orderDate = orderDate;

@@ -11,35 +11,35 @@
 ```
 [INFO] Scanning for projects...
 [INFO] 
-[INFO] -----------------< com.carservice:carservice-schedule >-----------------
-[INFO] Building carservice-schedule 1.0-SNAPSHOT
+[INFO] -----------------< com.carservice:carservice >-----------------
+[INFO] Building carservice 1.0-SNAPSHOT
 [INFO]   from pom.xml
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO] 
-[INFO] --- exec:3.1.0:java (default-cli) @ carservice-schedule ---
-Nov. 12, 2026 12:39:42 ПП org.hibernate.Version logVersion
+[INFO] --- exec:3.1.0:java (default-cli) @ carservice ---
+Nov. 18, 2026 11:56:44 ПП org.hibernate.Version logVersion
 INFO: HHH000412: Hibernate ORM core version 5.6.14.Final
-Nov. 12, 2026 12:39:43 ПП org.hibernate.annotations.common.reflection.java.JavaReflectionManager <clinit>
+Nov. 18, 2026 11:56:45 ПП org.hibernate.annotations.common.reflection.java.JavaReflectionManager <clinit>
 INFO: HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-Nov. 12, 2026 12:39:43 ПП org.hibernate.engine.jdbc.connections.internal.ConnectionProviderInitiator instantiateC3p0Provider
+Nov. 18, 2026 11:56:45 ПП org.hibernate.engine.jdbc.connections.internal.ConnectionProviderInitiator instantiateC3p0Provider
 WARN: HHH000022: c3p0 properties were encountered, but the c3p0 provider class was not found on the classpath; these properties are going to be ignored.
-Nov. 12, 2026 12:39:43 ПП org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
+Nov. 18, 2026 11:56:45 ПП org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
 WARN: HHH10001002: Using Hibernate built-in connection pool (not for production use!)
-Nov. 12, 2026 12:39:43 ПП org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+Nov. 18, 2026 11:56:45 ПП org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
 INFO: HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/carservice]
-Nov. 12, 2026 12:39:43 ПП org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+Nov. 18, 2026 11:56:45 ПП org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
 INFO: HHH10001001: Connection properties: {password=****, user=postgres}
-Nov. 12, 2026 12:39:43 ПП org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+Nov. 18, 2026 11:56:45 ПП org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
 INFO: HHH10001003: Autocommit mode: false
-Nov. 12, 2026 12:39:43 ПП org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections <init>
+Nov. 18, 2026 11:56:45 ПП org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PooledConnections <init>
 INFO: HHH000115: Hibernate connection pool size: 20 (min=1)
-Nov. 12, 2026 12:39:43 ПП org.hibernate.dialect.Dialect <init>
+Nov. 18, 2026 11:56:46 ПП org.hibernate.dialect.Dialect <init>
 INFO: HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
 Hibernate: 
     
     alter table "order" 
        drop constraint FKytqf0cpgkqvhoqresj3e03qm
-Nov. 12, 2026 12:39:43 ПП org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl getIsolatedConnection
+Nov. 18, 2026 11:56:46 ПП org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl getIsolatedConnection
 INFO: HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@3857c5a1] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
 Hibernate: 
     
@@ -69,7 +69,7 @@ Hibernate:
         model varchar(50),
         primary key (license_plate)
     )
-Nov. 12, 2026 12:39:43 ПП org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl getIsolatedConnection
+Nov. 18, 2026 11:56:46 ПП org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl getIsolatedConnection
 INFO: HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@4682e671] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
 Hibernate: 
     
@@ -736,12 +736,12 @@ Hibernate:
 Тривалість: 0.5
 Вартість: 300
 --------------------------------------------------
-Nov. 12, 2026 12:39:44 ПП org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PoolState stop
+Nov. 18, 2026 11:56:46 ПП org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl$PoolState stop
 INFO: HHH10001008: Cleaning up connection pool [jdbc:postgresql://localhost:5432/carservice]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  1.730 s
-[INFO] Finished at: 2026-11-12T12:39:44+02:00
+[INFO] Total time:  2.817 s
+[INFO] Finished at: 2026-11-18T11:56:46+02:00
 [INFO] ------------------------------------------------------------------------
 ```

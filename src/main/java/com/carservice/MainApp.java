@@ -24,8 +24,8 @@ public class MainApp {
             seedSampleData(factory);
 
             try (Session session = factory.openSession()) {
-                List<CarServiceScheduleDTO> results = session.createQuery(
-                        "select new com.carservice.CarServiceScheduleDTO("
+                List<OrderWorkDTO> results = session.createQuery(
+                        "select new com.carservice.OrderWorkDTO("
                                 + "o.orderId, o.orderDate, c.licensePlate, c.brand, c.model, "
                                 + "w.workName, w.workCategory, ow.duration, ow.cost) "
                                 + "from OrderWork ow "
@@ -33,9 +33,9 @@ public class MainApp {
                                 + "join o.car c "
                                 + "join ow.work w "
                                 + "order by o.orderDate, o.orderId, w.workName",
-                        CarServiceScheduleDTO.class).getResultList();
+                        OrderWorkDTO.class).getResultList();
 
-                for (CarServiceScheduleDTO info : results) {
+                for (OrderWorkDTO info : results) {
                     System.out.printf(
                             "Замовлення: %d%n"
                                     + "Дата замовлення: %s%n"
