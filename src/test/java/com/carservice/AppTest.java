@@ -35,4 +35,16 @@ public class AppTest
     {
         assertTrue( true );
     }
+
+    public void testPerformedWorksArePrintedOnSeparateLinesWithoutSemicolons()
+    {
+        ServiceOrder order = new ServiceOrder(1201, "2026-09-02", "CA 1001 AA",
+                "Skoda", "Octavia", "Заміна мастила; Заміна фільтра");
+
+        String output = order.toString();
+
+        assertTrue(output.contains("performedWorks=\"Заміна мастила"
+                + System.lineSeparator() + "Заміна фільтра\""));
+        assertFalse(output.contains(";"));
+    }
 }

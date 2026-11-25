@@ -28,6 +28,9 @@ public class ServiceOrder {
     }
 
     public String toString() {
+        String formattedPerformedWorks = performedWorks == null
+                ? null
+                : performedWorks.replaceAll("\\s*;\\s*", System.lineSeparator());
         return "ServiceOrder {" +
                 " id=\"" + id + "\"\n" +
                 " orderNumber=\"" + orderNumber + "\"\n" +
@@ -35,7 +38,7 @@ public class ServiceOrder {
                 " licensePlate=\"" + licensePlate + "\"\n" +
                 " brand=\"" + brand + "\"\n" +
                 " model=\"" + model + "\"\n" +
-                " performedWorks=\"" + performedWorks + "\"\n" +
+                " performedWorks=\"" + formattedPerformedWorks + "\"\n" +
                 "}";
     }
 }
